@@ -37,82 +37,92 @@ public class Market implements IMarketable{
         Market market = new Market();
         Scanner scan = new Scanner(System.in);
         System.out.println("Choose the operation: 1 for Products, 2 for Sales, 3 to Exit \n");
-        int operation = scan.nextInt();
-        while(operation < 1 || operation > 3){
-            System.out.println("Not such an operation, enter valid number: \n");
-            operation = scan.nextInt();
-        }
-
-        if(operation == 1) {
-            System.out.println("Choose one of the product operations: \n 1: Add new product \n 2: Edit product \n 3: Remove product \n 4: Show all products \n 5: Show products by category \n 6: Show products by price interval \n 7: Search product by name \n");
-            int productOperation = scan.nextInt();
-            while (productOperation < 1 || productOperation > 7) {
+        try {
+            int operation = scan.nextInt();
+            while (operation != 1 && operation != 2 && operation != 3) {
                 System.out.println("Not such an operation, enter valid number: \n");
-                productOperation = scan.nextInt();
+                operation = scan.nextInt();
             }
-            switch (productOperation){
-                case 1:
-                    market.addNewProduct();
-                    break;
-                case 2:
-                    market.editProduct();
-                    break;
-                case 3:
-                    market.deleteProduct();
-                    break;
-                case 4:
-                    market.getAllProducts();
-                    break;
-                case 5:
-                    market.getProductsByCategory();
-                    break;
-                case 6:
-                    market.searchProductByPriceInterval();
-                    break;
-                case 7:
-                    market.searchProductByName();
-                    break;
+
+            if (operation == 1) {
+                System.out.println("Choose one of the product operations: \n 1: Add new product \n 2: Edit product \n 3: Remove product \n 4: Show all products \n 5: Show products by category \n 6: Show products by price interval \n 7: Search product by name \n 8: Exit");
+                int productOperation = scan.nextInt();
+                while (productOperation < 1 || productOperation > 8) {
+                    System.out.println("Not such an operation, enter valid number: \n");
+                    productOperation = scan.nextInt();
+                }
+                switch (productOperation) {
+                    case 1:
+                        market.addNewProduct();
+                        break;
+                    case 2:
+                        market.editProduct();
+                        break;
+                    case 3:
+                        market.deleteProduct();
+                        break;
+                    case 4:
+                        market.getAllProducts();
+                        break;
+                    case 5:
+                        market.getProductsByCategory();
+                        break;
+                    case 6:
+                        market.searchProductByPriceInterval();
+                        break;
+                    case 7:
+                        market.searchProductByName();
+                        break;
+                    case 8:
+                        System.exit(0);
+                }
             }
+
+            if (operation == 2) {
+                System.out.println("Choose one of the sale operations: \n 1: Add new sale \n 2: Return product from sale \n 3: Remove the sale \n 4: Show all the sales \n 5: Show sales by date interval \n 6: Show sales by price interval \n 7: Show sales by date \n 8: Show sale by id \n 9: Exit \n");
+                int saleOperation = scan.nextInt();
+                while (saleOperation < 1 || saleOperation > 9) {
+                    System.out.println("Not such an operation, enter valid number: \n");
+                    saleOperation = scan.nextInt();
+                }
+                switch (saleOperation) {
+                    case 1:
+                        market.addNewSale();
+                        break;
+                    case 2:
+                        market.returnProductFromSale();
+                        break;
+                    case 3:
+                        market.removeSale();
+                        break;
+                    case 4:
+                        market.getAllSales();
+                        break;
+                    case 5:
+                        market.getSalesByDateInterval();
+                        break;
+                    case 6:
+                        market.getSalesByPriceInterval();
+                        break;
+                    case 7:
+                        market.getSalesByDate();
+                        break;
+                    case 8:
+                        market.getSaleById();
+                        break;
+                    case 9:
+                        System.exit(0);
+                }
+            }
+
+            if (operation == 3) {
+                System.exit(0);
+            }
+        }catch (Exception e){
+            System.out.println("Input type is not correct \n");
         }
 
-        if(operation == 2){
-            System.out.println("Choose one of the sale operations: \n 1: Add new sale \n 2: Return product from sale \n 3: Remove the sale \n 4: Show all the sales \n 5: Show sales by date interval \n 6: Show sales by price interval \n 7: Show sales by date \n 8: Show sale by id \n");
-            int saleOperation = scan.nextInt();
-            while (saleOperation < 1 || saleOperation > 8) {
-                System.out.println("Not such an operation, enter valid number: \n");
-                saleOperation = scan.nextInt();
-            }
-            switch (saleOperation){
-                case 1:
-                    market.addNewSale();
-                    break;
-                case 2:
-                    market.returnProductFromSale();
-                    break;
-                case 3:
-                    market.removeSale();
-                    break;
-                case 4:
-                    market.getAllSales();
-                    break;
-                case 5:
-                    market.getSalesByDateInterval();
-                    break;
-                case 6:
-                    market.getSalesByPriceInterval();
-                    break;
-                case 7:
-                    market.getSalesByDate();
-                    break;
-                case 8:
-                    market.getSaleById();
-                    break;
-            }
-        }
 
-        if(operation==3){
-            System.exit(0);
-        }
     }
 
     Category categorySelecter(){
@@ -208,7 +218,8 @@ public class Market implements IMarketable{
             System.out.println("Enter the code of product: \n");
             long code = scan.nextLong();
             System.out.println("Enter new name of product: \n");
-            String name = scan.nextLine();
+            String name = scan.nextLine();;
+
             editProduct(code, name);
             menu();
         };
